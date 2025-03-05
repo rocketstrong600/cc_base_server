@@ -37,7 +37,6 @@ local function openProgram(page, title, maxW, maxH, x, y)
             :onDone(function()
                 f:remove()
             end)
-
     return f
 end
 

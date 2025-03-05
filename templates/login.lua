@@ -73,5 +73,3 @@ local submitBtn = main:addButton()
         os.queueEvent("login_success", result)
     end
 end)
-
-Basalt.autoUpdate()

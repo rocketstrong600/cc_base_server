@@ -4,7 +4,7 @@ local main = basalt.createFrame():setBackground(colors.white)
 
 local idInput = ""
 local passwordInput = ""
-local url = "http://127.0.0.1:3000"
+local url = "http://celtis.alcorlabs:35535/auth"
 
 local function sendUserData(user, password, url)
 
@@ -25,7 +25,7 @@ local function sendUserData(user, password, url)
     if response then
         local body = response.readAll()
         response.close()
-        local table = textutils.unserializeJSON(body).applications
+        local table = textutils.unserializeJSON(body).pages
         return table
     else
         basalt.debug("Error: No response received.")

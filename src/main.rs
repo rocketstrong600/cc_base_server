@@ -44,7 +44,7 @@ where
 async fn main() {
     let app = Router::new()
         .route("/", get(root))
-        .route("/install", get(install))
+        .route("/run", get(run))
         .route("/login", get(login))
         .route("/home", get(home));
 
@@ -59,10 +59,10 @@ async fn root() -> Json<&'static str> {
     Json("{\"status\": \"OK\"}")
 }
 
-async fn install() -> Lua<String> {
+async fn run() -> Lua<String> {
     let mut context = Context::new();
-    let install_lua = TEMPLATES.render("install.lua", &context).unwrap();
-    Lua(install_lua)
+    let run_lua = TEMPLATES.render("run.lua", &context).unwrap();
+    Lua(run_lua)
 }
 
 async fn login() -> Lua<String> {

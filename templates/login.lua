@@ -1,4 +1,4 @@
-local main = Basalt.createFrame():setBackground(colors.white)
+
 
 local idInput = ""
 local passwordInput = ""
@@ -28,12 +28,34 @@ local function sendUserData(user, password, url)
     else
         Basalt.debug("Error: No response received.")
     end
+
 end
 
-local screenWidth, screenHeight = term.getSize();
+local mainScreenWidth, mainScreenHeight = Main:getSize();
+
+local framePadding = PaddingTool.PadWindowPercent(mainScreenWidth, mainScreenHeight, 30, 12, 15, 15, 20, 20)
+
+local frame = Main:addMovableFrame()
+:setSize(framePadding[3], framePadding[4])
+:setPosition(framePadding[1]+1, framePadding[2] )
+:setBackground(colors.gray)
+
+frame:addLabel()
+:setSize("parent.w", 1)
+:setBackground(colors.lightGray)
+:setForeground(colors.black)
+:setText("Sign In")
+
+local loginPage = frame:addFrame()
+:setSize("parent.w -1","parent.h -2")
+:setBackground(colors.white)
+:setPosition(1, 2)
+
+local screenWidth, screenHeight = frame:getSize();
+
 local padding = PaddingTool.PadWindowPercent(screenWidth, screenHeight, 100, 100, 10, 10, 33, 33)
 
-local usrId = main:addInput()
+local usrId = loginPage:addInput()
     :setInputType("text")
     :setDefaultText("Staff ID")
     :setInputLimit(10)
@@ -45,7 +67,7 @@ local usrId = main:addInput()
     idInput = text.getValue()
 end)
 
-local usrPswd = main:addInput()
+local usrPswd = loginPage:addInput()
     :setInputType("password")
     :setDefaultText("Password")
     :setInputLimit(10)
@@ -57,7 +79,7 @@ local usrPswd = main:addInput()
     passwordInput = text.getValue()
 end)
 
-local submitBtn = main:addButton()
+local submitBtn = loginPage:addButton()
     :setText("submit")
     :setSize(padding[3], 1)
     :setPosition(padding[1], padding[2] + 4)

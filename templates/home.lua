@@ -7,11 +7,41 @@ Main:setTheme({FrameBG = colors.gray, FrameFG = colors.white})
 local tabs = {}
 local screenWidth, screenHeight = Main:getSize();
 
-local loginPage = PageLoader.requestPage("http://celtis.alcorlabs.com:35535/login")
-if loginPage then
-    --openProgram(loginPage, "Sign In", 30, 12)
-    loginPage()
+local function createMovableWindow(page, title, maxW, maxH, paddingL, paddingR, paddingT, paddingB)
+
+    local ok, pageFunc = pcall(page)
+    if not ok then
+        print("Failed to load page: " .. pageFunc)
+        return
+    end
+
+    local framePadding = PaddingTool.PadWindowPercent(screenWidth, screenHeight, maxW, maxH, paddingL, paddingR, paddingT, paddingB)
+
+    local frame = Main:addMovableFrame()
+    :setSize(framePadding[3], framePadding[4])
+    :setPosition(framePadding[1]+1, framePadding[2] )
+    :setBackground(colors.gray)
+
+    frame:addLabel()
+    :setSize("parent.w", 1)
+    :setBackground(colors.lightGray)
+    :setForeground(colors.black)
+    :setText(title)
+
+    local iFrame = frame:addFrame()
+    :setSize("parent.w -1","parent.h -2")
+    :setBackground(colors.white)
+    :setPosition(1, 2)
+
+    iFrame:addProgram()
+    :setSize("parent.w", "parent.h")
+    :execute(function()
+        pageFunc(iFrame)
+    end)
+
 end
+
+local loginPage = createMovableWindow(PageLoader.requestPage("http://celtis.alcorlabs.com:35535/login"), "Sign In", 30, 12, 10, 10, 33, 33)
 
 local function initEnv(tabs)
     

@@ -1,4 +1,4 @@
-return function(iFrame)
+return function(self)
 
     local idInput
     local passwordInput
@@ -33,11 +33,11 @@ return function(iFrame)
 
     local mainScreenWidth, mainScreenHeight = Main:getSize();
 
-    local screenWidth, screenHeight = frame:getSize();
+    local screenWidth, screenHeight = self:getSize();
 
     local padding = PaddingTool.PadWindowPercent(screenWidth, screenHeight, 100, 100, 10, 10, 33, 33)
 
-    local usrId = loginPage:addInput()
+    local usrId = self:addInput()
         :setInputType("text")
         :setDefaultText("Staff ID")
         :setInputLimit(10)
@@ -49,7 +49,7 @@ return function(iFrame)
         idInput = text.getValue()
     end)
 
-    local usrPswd = loginPage:addInput()
+    local usrPswd = self:addInput()
         :setInputType("password")
         :setDefaultText("Password")
         :setInputLimit(10)
@@ -61,7 +61,7 @@ return function(iFrame)
         passwordInput = text.getValue()
     end)
 
-    local submitBtn = loginPage:addButton()
+    local submitBtn = self:addButton()
         :setText("submit")
         :setSize(padding[3], 1)
         :setPosition(padding[1], padding[2] + 4)

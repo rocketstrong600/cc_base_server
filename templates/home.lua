@@ -34,15 +34,12 @@ local function openProgram(page, title, maxW, maxH, x, y)
             :setSize("parent.w -1","parent.h -2")
             :setPosition(1, 2)
             :execute(page)
-            :onDone(function()
-                f:remove()
-            end)
     return f
 end
 
 local loginPage = PageLoader.requestPage("http://celtis.alcorlabs.com:35535/login")
 if loginPage then
-    openProgram("alcor/login", "Sign In", 30, 12)
+    openProgram(loginPage, "Sign In", 30, 12)
 end
 
 local function initEnv(tabs)

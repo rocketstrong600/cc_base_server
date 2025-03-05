@@ -42,7 +42,9 @@ local function openProgram(page, title, maxW, maxH, x, y)
 end
 
 local loginPage = pageLoader.requestPage("http://celtis.alcorlabs.com:35535/login")
-openProgram(loginPage, "Sign In", 30, 12)
+if loginPage then
+    openProgram(loginPage, "Sign In", 30, 12)
+end
 
 local function initEnv(tabs)
     

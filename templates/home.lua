@@ -33,11 +33,7 @@ local function createMovableWindow(page, title, maxW, maxH, paddingL, paddingR, 
     :setBackground(colors.white)
     :setPosition(1, 2)
 
-    iFrame:addProgram()
-    :setSize("parent.w", "parent.h")
-    :execute(function()
-        pageFunc(iFrame)
-    end)
+    pageFunc(iFrame)
 
 end
 

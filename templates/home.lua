@@ -71,16 +71,12 @@ local function initEnv(tabs)
     end)
 end
     
-parallel.waitForAny(
-    function()
-        Basalt.autoUpdate()
-    end,
-    function()
-        while true do
-            local event, receivedTabs = os.pullEvent("login_success")
-            tabs = receivedTabs
-            table.insert(tabs, 1, {name="Shell", page="rom/programs/shell.lua"})
-            initEnv(tabs)
-        end
-    end
-)
+--parallel.waitForAny(
+--    function()
+--        while true do
+--            local event, receivedTabs = os.pullEvent("login_success")
+--            tabs = receivedTabs
+--            table.insert(tabs, 1, {name="Shell", page="rom/programs/shell.lua"})
+--            initEnv(tabs)
+--        end
+--    end)

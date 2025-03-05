@@ -1,10 +1,5 @@
---Basalt = require("/api/basalt")
---PaddingTool = require("/api/paddingTool")
---PageLoader = require("/api/pageLoader")
-
 Main:setTheme({FrameBG = colors.gray, FrameFG = colors.white})
 
-local tabs = {}
 local screenWidth, screenHeight = Main:getSize();
 
 local function createMovableWindow(page, title, maxW, maxH, paddingL, paddingR, paddingT, paddingB)
@@ -37,8 +32,6 @@ local function createMovableWindow(page, title, maxW, maxH, paddingL, paddingR, 
 
 end
 
-local loginPage = createMovableWindow(PageLoader.requestPage("http://celtis.alcorlabs.com:35535/login"), "Sign In", 30, 14, 10, 10, 20, 20)
-
 local function initEnv(tabs)
     
     local frames = {}
@@ -64,3 +57,14 @@ local function initEnv(tabs)
         frames[self:getItemIndex()]:show()
     end)
 end
+
+local function listenForSuccess()
+        while true do
+            local event, receivedTabs = os.pullEvent("login_success")
+            initEnv(receivedTabs)
+        end
+end
+
+local loginPage = createMovableWindow(PageLoader.requestPage(HostUrl .. "/login"), "Sign In", 30, 14, 10, 10, 20, 20)
+
+AddTask(listenForSuccess)

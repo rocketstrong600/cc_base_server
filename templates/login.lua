@@ -2,7 +2,7 @@ return function(self)
 
     local idInput
     local passwordInput
-    local url = "http://celtis.alcorlabs:35535/auth"
+    local url = HostUrl .. "/auth"
 
     local function sendUserData(user, password, url)
 

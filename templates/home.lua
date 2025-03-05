@@ -1,7 +1,7 @@
-local basalt = require("/api/basalt")
-local paddingTool = require("/api/paddingTool")
-local pageLoader = require("/api/pageLoader")
-local main = basalt.createFrame():setTheme({FrameBG = colors.gray, FrameFG = colors.white})
+--Basalt = require("/api/basalt")
+--PaddingTool = require("/api/paddingTool")
+--PageLoader = require("/api/pageLoader")
+local main = Basalt.createFrame():setTheme({FrameBG = colors.gray, FrameFG = colors.white})
 
 local tabs = {}
 local screenWidth, screenHeight = term.getSize();
@@ -18,7 +18,7 @@ local function openProgram(page, title, maxW, maxH, x, y)
         maxH = defaultHeightMax
     end
 
-    local padding = paddingTool.PadWindowPercent(screenWidth, screenHeight, maxW, maxH, 15, 15, 20, 20)
+    local padding = PaddingTool.PadWindowPercent(screenWidth, screenHeight, maxW, maxH, 15, 15, 20, 20)
 
     local f = main:addMovableFrame()
             :setSize(padding[3], padding[4])
@@ -33,9 +33,7 @@ local function openProgram(page, title, maxW, maxH, x, y)
         f:addProgram()
             :setSize("parent.w -1","parent.h -2")
             :setPosition(1, 2)
-            :execute(function()
-                pcall(page)
-            end)
+            :execute(page)
             :onDone(function()
                 f:remove()
             end)
@@ -43,7 +41,7 @@ local function openProgram(page, title, maxW, maxH, x, y)
     return f
 end
 
-local loginPage = pageLoader.requestPage("http://celtis.alcorlabs.com:35535/login")
+local loginPage = PageLoader.requestPage("http://celtis.alcorlabs.com:35535/login")
 if loginPage then
     openProgram(loginPage, "Sign In", 30, 12)
 end
@@ -76,7 +74,7 @@ end
     
 parallel.waitForAny(
     function()
-        basalt.autoUpdate()
+        Basalt.autoUpdate()
     end,
     function()
         while true do

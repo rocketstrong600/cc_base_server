@@ -1,6 +1,4 @@
-local basalt = require("/api/basalt")
-local paddingTool = require("/api/paddingTool")
-local main = basalt.createFrame():setBackground(colors.white)
+local main = Basalt.createFrame():setBackground(colors.white)
 
 local idInput = ""
 local passwordInput = ""
@@ -18,7 +16,7 @@ local function sendUserData(user, password, url)
     local response, err = http.post(url, jsonData, { ["Content-Type"] = "application/json"})
 
     if not response then
-        basalt.debug("HTTP request failed: " .. (err or "unknown error"))
+        Basalt.debug("HTTP request failed: " .. (err or "unknown error"))
         return nil
     end
 
@@ -28,12 +26,12 @@ local function sendUserData(user, password, url)
         local table = textutils.unserializeJSON(body).pages
         return table
     else
-        basalt.debug("Error: No response received.")
+        Basalt.debug("Error: No response received.")
     end
 end
 
 local screenWidth, screenHeight = term.getSize();
-local padding = paddingTool.PadWindowPercent(screenWidth, screenHeight, 100, 100, 10, 10, 33, 33)
+local padding = PaddingTool.PadWindowPercent(screenWidth, screenHeight, 100, 100, 10, 10, 33, 33)
 
 local usrId = main:addInput()
     :setInputType("text")
@@ -71,9 +69,9 @@ local submitBtn = main:addButton()
 
     if result then
         -- Process the result if the function returned successfully
-        basalt.debug(result)
+        Basalt.debug(result)
         os.queueEvent("login_success", result)
     end
 end)
 
-basalt.autoUpdate()
+Basalt.autoUpdate()

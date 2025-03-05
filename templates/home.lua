@@ -37,7 +37,7 @@ local function createMovableWindow(page, title, maxW, maxH, paddingL, paddingR, 
 
 end
 
-local loginPage = createMovableWindow(PageLoader.requestPage("http://celtis.alcorlabs.com:35535/login"), "Sign In", 30, 12, 10, 10, 33, 33)
+local loginPage = createMovableWindow(PageLoader.requestPage("http://celtis.alcorlabs.com:35535/login"), "Sign In", 30, 14, 10, 10, 20, 20)
 
 local function initEnv(tabs)
     

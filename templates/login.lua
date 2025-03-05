@@ -31,8 +31,6 @@ return function(self)
 
     end
 
-    local mainScreenWidth, mainScreenHeight = Main:getSize();
-
     local screenWidth, screenHeight = self:getSize();
 
     local padding = PaddingTool.PadWindowPercent(screenWidth, screenHeight, 100, 100, 10, 10, 33, 33)
